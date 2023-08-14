@@ -26,7 +26,6 @@ class Game:
             self._check_events()
             self._first_update_components()
             self._update_screen()
-            self.second_update_components()
 
     def _check_events(self):
 
@@ -54,13 +53,20 @@ class Game:
 
         # Pacman movement
         if event.key == pygame.K_w or event.key == pygame.K_UP:
+            self.pacman.image = self.settings.pacman_image
             self.pacman.forward = True
         if event.key == pygame.K_s or event.key == pygame.K_DOWN:
+            self.pacman.image = self.settings.pacman_image
             self.pacman.backward = True
+            self.pacman.image = pygame.transform.rotate(self.pacman.image, 180)
         if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+            self.pacman.image = self.settings.pacman_image
             self.pacman.rightward = True
+            self.pacman.image = pygame.transform.rotate(self.pacman.image, -90)
         if event.key == pygame.K_a or event.key == pygame.K_LEFT:
+            self.pacman.image = self.settings.pacman_image
             self.pacman.leftward = True
+            self.pacman.image = pygame.transform.rotate(self.pacman.image, 90)
 
     def _keyup_events(self, event):
 
@@ -73,7 +79,7 @@ class Game:
             self.pacman.rightward = False
         if event.key == pygame.K_a or event.key == pygame.K_LEFT:
             self.pacman.leftward = False
-            
+
     def _first_update_components(self):
         self.pacman.pacman_movement()
 
@@ -81,8 +87,6 @@ class Game:
         self.screen.fill(self.settings.back_color)
         self.pacman.blit()
         pygame.display.flip()
-
-
 
 
 if __name__ == "__main__":

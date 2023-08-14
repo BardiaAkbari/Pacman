@@ -12,7 +12,6 @@ class Pacman:
         self.image = self.settings.pacman_image
         self.rect = self.image.get_rect()
         self.rect.midbottom = self.screen.get_rect().midbottom
-        self.image = pygame.transform.rotate(self.image, 90)
 
         # Moving settings
         self.forward = False
@@ -27,16 +26,9 @@ class Pacman:
 
         if self.forward:
             self.rect.y -= self.settings.pacman_speed
-            self.image = pygame.transform.rotate(self.image, 0)
         if self.backward:
             self.rect.y += self.settings.pacman_speed
-            pygame.transform.rotate(self.image, 120)
         if self.rightward:
             self.rect.x += self.settings.pacman_speed
-            pygame.transform.rotate(self.image, 90)
         if self.leftward:
             self.rect.x -= self.settings.pacman_speed
-            self.image = pygame.transform.rotate(self.image, 90)
-
-
-
