@@ -13,7 +13,9 @@ class Settings:
         # Image URLs
         self.main_path = "D:\\Final Projects\\OwnProjects\\Pacman\\Images\\"
         self.pacman_image_path = self.main_path + "Pacman.bmp"
+        self.rectangle_image_path = self.main_path + "Rectangle1.bmp"
 
         # Pacman
         self.pacman_speed = 1
         self.pacman_image = pygame.image.load(self.pacman_image_path)
+        self.rectangle_image = pygame.image.load(self.rectangle_image_path)
