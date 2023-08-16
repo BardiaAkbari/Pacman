@@ -3,7 +3,7 @@ import sys
 from settings import Settings
 from pacman import Pacman
 from public import Public
-from rectangle import Rectangle
+from square import Square
 
 
 class Game:
@@ -26,7 +26,8 @@ class Game:
         self.pacman = Pacman(self.public)
 
         # Rec sets
-        self.rectangles = pygame.sprite.Group()
+        self.squares = pygame.sprite.Group()
+        self.matrix = self.public.matrix
         self._generate_map()
 
     def run_game(self):
@@ -95,50 +96,27 @@ class Game:
     def _update_screen(self):
         self.screen.fill(self.settings.back_color)
         self.pacman.blit()
-        self._draw_rectangles()
+        self._draw_squares()
         pygame.display.flip()
 
     def _generate_map(self):
-        rectangle_sample = Rectangle(self.public)
-        width = rectangle_sample.rect.width
-        height = rectangle_sample.rect.height
-        number_of_alien_by_x = self.rect.width // width
-        number_of_alien_by_y = self.rect.height // width - 2
+        square_sample = Square(self.public)
+        side_size = square_sample.rect.width
 
-        for i in range(number_of_alien_by_x):
+        for i in range(27):
+            for j in range(48):
+                if self.matrix[i][j] == 1:
+                    my_square = Square(self.public)
+                    my_square.rect.x = j * side_size
+                    my_square.rect.y = i * side_size
+                    self.squares.add(my_square)
 
-            my_rectangle = Rectangle(self.public)
-            my_rectangle.rect.x = i * width
-            my_rectangle.rect.y = 0
-            self.rectangles.add(my_rectangle)
+    def _draw_squares(self):
 
-        for i in range(number_of_alien_by_x):
-            my_rectangle = Rectangle(self.public)
-            my_rectangle.rect.x = i * width
-            my_rectangle.rect.bottom = self.rect.bottom
-            self.rectangles.add(my_rectangle)
+        for square in self.squares:
+            square.blit()
 
-        for i in range(number_of_alien_by_y):
-            my_rectangle = Rectangle(self.public)
-            my_rectangle.image = pygame.transform.rotate(my_rectangle.image, 90)
-            my_rectangle.rect.x = 0
-            my_rectangle.rect.y = 3 + height + i * width
-            self.rectangles.add(my_rectangle)
-
-        for i in range(number_of_alien_by_y):
-            my_rectangle = Rectangle(self.public)
-            my_rectangle.image = pygame.transform.rotate(my_rectangle.image, 90)
-            my_rectangle.rect.right = self.rect.right + 4
-            my_rectangle.rect.y = 3 + height + i * width
-            self.rectangles.add(my_rectangle)
-
-    def _draw_rectangles(self):
-
-        for rectangle in self.rectangles:
-            rectangle.blit()
-
-    def _check_allow_movement(self):
-        
+    # def _check_allow_movement(self):
 
 
 if __name__ == "__main__":

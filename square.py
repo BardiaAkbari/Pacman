@@ -2,7 +2,7 @@ from public import Public
 from pygame.sprite import Sprite
 
 
-class Rectangle(Sprite):
+class Square(Sprite):
 
     def __init__(self, public: Public):
         # Initial parameters

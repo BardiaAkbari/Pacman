@@ -1,5 +1,5 @@
 from public import Public
-from rectangle import Rectangle
+from square import Square
 
 
 class Pacman:
@@ -11,7 +11,7 @@ class Pacman:
         self.settings = public.settings
         self.image = self.settings.pacman_image
         self.rect = self.image.get_rect()
-        self.rectangle_sample = Rectangle(public)
+        self.rectangle_sample = Square(public)
         self.rect.midbottom = self.screen.get_rect().midbottom
         self.rect.y = self.rect.x + self.rectangle_sample.rect.height
         # Moving settings
